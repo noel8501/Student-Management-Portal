@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f6fb">
+  <title>Student Management Portal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main id="auth-screen" class="auth-screen" hidden>
+    <form id="auth-form" class="auth-card">
+      <div class="logo">SP</div><p class="eyebrow">STUDENT MANAGEMENT</p>
+      <h1 id="auth-title">Welcome to your portal</h1>
+      <p class="muted" id="auth-copy">Sign in to see your student workspace.</p>
+      <div id="signup-fields" hidden>
+        <label>Full name<input id="signup-name" autocomplete="name"></label>
+        <label>Student ID<input id="signup-id" autocomplete="username" placeholder="e.g. stu1004"></label>
+        <label>Course<input id="signup-course" placeholder="e.g. Computer Science"></label>
+      </div>
+      <label>Sign in as
+        <select id="login-role"><option value="student">Student</option><option value="teacher">Teacher</option></select>
+      </label>
+      <label>Username<input id="login-username" required autocomplete="username" placeholder="Enter your username"></label>
+      <label>Password<input id="login-password" type="password" required autocomplete="current-password" placeholder="Enter your password"></label>
+      <p id="login-message" class="message" role="alert" aria-live="polite"></p>
+      <button id="auth-submit" class="button primary full-width" type="submit">Sign in</button>
+      <p class="auth-switch"><span id="switch-copy">Don’t have an account?</span> <button id="auth-toggle" class="text-button" type="button">Create account</button></p>
+      <details class="demo-accounts"><summary>Demo sign-in details</summary><span>Teacher: <code>teacher</code> / <code>teach123</code></span><span>Student: <code>stu1001</code> / <code>student123</code></span></details>
+    </form>
+  </main>
+
+  <div id="portal" class="portal" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard"><span class="logo small-logo">SP</span> Student Portal</a>
+      <p class="eyebrow nav-caption">WORKSPACE</p>
+      <a class="nav-link active" href="#dashboard">▦ &nbsp; Dashboard</a>
+      <a class="nav-link" href="#profile-details">♙ &nbsp; My profile</a>
+      <a class="nav-link" href="#students">▤ &nbsp; Students &amp; academics</a>
+      <a class="nav-link" href="#fees">₹ &nbsp; Fees</a>
+      <a class="nav-link" href="#timetable">▦ &nbsp; Exam timetable</a>
+      <a class="nav-link" href="#bus">🚌 &nbsp; Bus attendance</a>
+      <a class="nav-link" href="#reviews">✎ &nbsp; Reviews</a>
+      <div class="sidebar-note"><strong>Your campus, organized.</strong><p>Student details, learning progress and daily attendance in one place.</p></div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div class="top-title">
+          <button id="dashboard-menu" class="menu-toggle" type="button" aria-label="Toggle dashboard navigation" aria-expanded="false">☰</button>
+          <div><p class="eyebrow">OVERVIEW</p><h1 id="welcome-title">Dashboard</h1></div>
+        </div>
+        <div class="top-actions">
+          <button class="button secondary theme-toggle" type="button">🌙 Dark theme</button>
+          <button id="logout-button" class="button secondary" type="button">Sign out</button>
+        </div>
+      </header>
+
+      <section class="welcome-card">
+        <div class="profile">
+          <img id="profile-image" alt="Profile picture" hidden>
+          <span id="profile-initials" class="profile-initials">SP</span>
+          <label class="photo-button">Change photo<input id="photo-input" type="file" accept="image/*" hidden></label>
+        </div>
+        <div><p class="eyebrow light" id="role-label">PORTAL</p><h2 id="welcome-name">Welcome</h2><p id="welcome-text"></p></div>
+      </section>
+
+      <section class="stats-grid" aria-label="Portal summary">
+        <article class="stat-card"><span id="stat-one-label">Students</span><strong id="stat-one">0</strong></article>
+        <article class="stat-card"><span id="stat-two-label">Attendance</span><strong id="stat-two">0%</strong></article>
+        <article class="stat-card"><span id="stat-three-label">Reviews</span><strong id="stat-three">0</strong></article>
+      </section>
+
+      <section id="profile-details" class="panel">
+        <div class="section-heading"><div><p class="eyebrow">PERSONAL INFORMATION</p><h2>Student profile</h2></div></div>
+        <div id="profile-details-content" class="profile-details-grid"></div>
+      </section>
+
+      <section id="students" class="panel">
+        <div class="section-heading"><div><p class="eyebrow">ACADEMIC RECORDS</p><h2 id="records-title">Students and academics</h2></div><p id="permission-note" class="muted"></p></div>
+        <div id="teacher-records" hidden>
+          <div class="toolbar">
+            <input id="student-search" type="search" placeholder="Search name, ID or course" aria-label="Search students">
+            <button id="add-student" class="button primary" type="button">＋ Add student</button>
+          </div>
+          <div class="table-wrap">
+            <table><thead><tr><th>STUDENT</th><th>MATH</th><th>ENGLISH</th><th>SCIENCE</th><th>CLASS ATTENDANCE</th><th>BUS TODAY</th><th>ACTIONS</th></tr></thead>
+              <tbody id="student-rows"></tbody>
+            </table>
+          </div>
+        </div>
+        <div id="student-record" hidden></div>
+      </section>
+
+      <section id="bus" class="panel">
+        <div class="section-heading"><div><p class="eyebrow">TRANSPORT</p><h2>Bus attendance</h2></div><p class="muted">Daily pickup and drop-off records</p></div>
+        <div id="teacher-bus" hidden>
+          <div class="toolbar"><label class="date-field">Attendance date<input id="bus-date" type="date"></label><span id="bus-summary" class="muted"></span></div>
+          <div class="table-wrap">
+            <table><thead><tr><th>STUDENT</th><th>ROUTE</th><th>PICKUP</th><th>DROP-OFF</th><th>NOTE</th><th>ACTION</th></tr></thead><tbody id="bus-rows"></tbody></table>
+          </div>
+        </div>
+        <div id="student-bus"></div>
+      </section>
+
+      <section id="fees" class="panel">
+        <div class="section-heading"><div><p class="eyebrow">ACCOUNT SUMMARY</p><h2>Fee payment details</h2></div><p class="muted" id="fee-summary"></p></div>
+        <div id="teacher-fees" hidden>
+          <div class="toolbar"><button id="add-fee" class="button primary" type="button">＋ Add fee record</button></div>
+          <div class="table-wrap">
+            <table><thead><tr><th>STUDENT</th><th>FEE / TERM</th><th>AMOUNT DUE</th><th>PAID</th><th>BALANCE</th><th>DUE DATE</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="fee-rows"></tbody></table>
+          </div>
+        </div>
+        <div id="student-fees"></div>
+      </section>
+
+      <section id="timetable" class="panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">EXAM SCHEDULE</p><h2>Timetable</h2></div>
+          <div class="timetable-controls">
+            <label>Choose exam<select id="exam-select" aria-label="Choose exam timetable"></select></label>
+            <button id="add-exam" class="button primary" type="button" hidden>＋ Add exam</button>
+            <button id="edit-exam" class="button secondary" type="button" hidden>Edit exam</button>
+            <button id="add-exam-slot" class="button secondary" type="button" hidden>＋ Add subject</button>
+          </div>
+        </div>
+        <div id="exam-description" class="muted"></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>DATE</th><th>DAY</th><th>SUBJECT</th><th>TIME</th><th>ROOM</th><th id="exam-action-heading" hidden>ACTIONS</th></tr></thead><tbody id="exam-rows"></tbody></table>
+        </div>
+      </section>
+
+      <section id="reviews" class="panel">
+        <div class="section-heading"><div><p class="eyebrow">FEEDBACK</p><h2>Reviews and messages</h2></div></div>
+        <form id="review-form" class="review-form" hidden>
+          <label for="review-text">Send a message to your teacher</label>
+          <textarea id="review-text" rows="3" maxlength="500" required placeholder="Write your message…"></textarea>
+          <button class="button primary" type="submit">Submit message</button>
+        </form>
+        <div id="review-list" class="review-list"></div>
+      </section>
+      <footer class="site-note">This demo stores information in this browser only. Use fictional data; it is not a secure school records system.</footer>
+    </main>
+  </div>
+
+  <dialog id="student-dialog" class="edit-dialog">
+    <form id="student-form">
+      <div class="section-heading"><div><p class="eyebrow">STUDENT PROFILE</p><h2 id="student-dialog-title">Add student</h2></div><button class="icon-button" type="button" data-close="student-dialog" aria-label="Close">×</button></div>
+      <input id="edit-original-id" type="hidden">
+      <div class="form-grid">
+        <label>Full name<input id="edit-name" required></label><label>Student ID<input id="edit-id" required></label>
+        <label>Course / class<input id="edit-course" required></label><label>Grade<input id="edit-grade"></label>
+        <label>Parent / guardian<input id="edit-guardian"></label><label>Contact number<input id="edit-phone"></label>
+        <label>Email<input id="edit-email" type="email"></label><label>Bus route<input id="edit-route" placeholder="Route A"></label>
+        <label>Math mark<input id="edit-math" type="number" min="0" max="100" required></label>
+        <label>English mark<input id="edit-english" type="number" min="0" max="100" required></label>
+        <label>Science mark<input id="edit-science" type="number" min="0" max="100" required></label>
+        <label>Class attendance (%)<input id="edit-attendance" type="number" min="0" max="100" required></label>
+      </div>
+      <p id="student-form-message" class="message" aria-live="polite"></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" data-close="student-dialog">Cancel</button><button class="button primary" type="submit">Save student</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="fee-dialog" class="edit-dialog">
+    <form id="fee-form">
+      <div class="section-heading"><div><p class="eyebrow">FEE RECORD</p><h2 id="fee-dialog-title">Add fee record</h2></div><button class="icon-button" type="button" data-close="fee-dialog" aria-label="Close">×</button></div>
+      <input id="fee-original-id" type="hidden">
+      <div class="form-grid">
+        <label>Student<select id="fee-student" required></select></label><label>Fee / term<input id="fee-term" required placeholder="Term 1 tuition"></label>
+        <label>Amount due<input id="fee-due" type="number" min="0" step="0.01" required></label><label>Amount paid<input id="fee-paid" type="number" min="0" step="0.01" required></label>
+        <label>Due date<input id="fee-date" type="date" required></label>
+      </div>
+      <p id="fee-form-message" class="message" aria-live="polite"></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" data-close="fee-dialog">Cancel</button><button class="button primary" type="submit">Save fee</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="exam-dialog" class="edit-dialog">
+    <form id="exam-form">
+      <div class="section-heading"><div><p class="eyebrow">EXAM TIMETABLE</p><h2 id="exam-dialog-title">Add exam</h2></div><button class="icon-button" type="button" data-close="exam-dialog" aria-label="Close">×</button></div>
+      <input id="exam-original" type="hidden">
+      <label>Exam name<input id="exam-name" required placeholder="Mid-term examination"></label>
+      <label>Description<input id="exam-desc" placeholder="Term 1 assessment"></label>
+      <p id="exam-form-message" class="message" aria-live="polite"></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" data-close="exam-dialog">Cancel</button><button class="button primary" type="submit">Save exam</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="slot-dialog" class="edit-dialog">
+    <form id="slot-form">
+      <div class="section-heading"><div><p class="eyebrow">EXAM SCHEDULE</p><h2 id="slot-dialog-title">Add subject</h2></div><button class="icon-button" type="button" data-close="slot-dialog" aria-label="Close">×</button></div>
+      <input id="slot-original" type="hidden">
+      <div class="form-grid">
+        <label>Date<input id="slot-date" type="date" required></label><label>Subject<input id="slot-subject" required></label>
+        <label>Start time<input id="slot-start" type="time" required></label><label>End time<input id="slot-end" type="time" required></label>
+        <label>Room<input id="slot-room" required></label>
+      </div>
+      <p id="slot-form-message" class="message" aria-live="polite"></p>
+      <div class="dialog-actions"><button class="button secondary" type="button" data-close="slot-dialog">Cancel</button><button class="button primary" type="submit">Save timetable item</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

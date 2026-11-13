@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f6fa">
+  <title>CampusFlow | Student Management</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="logo">CF</span> CampusFlow</a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="#features">Features</a>
+      <a href="#preview">Portal preview</a>
+      <button class="button secondary theme-toggle" type="button">🌙 Dark theme</button>
+      <a class="button secondary" href="signin.html">Sign in</a>
+      <a class="button primary" href="register.html">Get started</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">STUDENT MANAGEMENT, MADE SIMPLE</p>
+        <h1>One clear place for the school day.</h1>
+        <p>Keep student profiles, academic progress, bus attendance, fee records and exam schedules together in a simple campus portal.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="register.html">Create an account</a>
+          <a class="button secondary" href="signin.html">Sign in</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Portal overview illustration">
+        <div class="demo-window">
+          <div class="demo-window-bar"><i></i><i></i><i></i><span>Campus dashboard</span></div>
+          <div class="demo-window-body">
+            <div class="demo-side"></div>
+            <div class="demo-main">
+              <div class="demo-welcome"></div>
+              <div class="demo-cards"><i></i><i></i><i></i></div>
+              <div class="demo-table"><b></b><b></b><b></b><b></b></div>
+              <div class="demo-note">Student records · attendance · timetable</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="feature-section">
+      <div class="section-title">
+        <p class="eyebrow">MADE FOR EVERYDAY CAMPUS TASKS</p>
+        <h2>Everything you need, easy to find</h2>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span>👤</span><h3>Student profiles</h3><p>Keep class, contact and guardian details together with academic records.</p></article>
+        <article class="feature-card"><span>📚</span><h3>Academic progress</h3><p>Review marks and class attendance from one organized dashboard.</p></article>
+        <article class="feature-card"><span>🚌</span><h3>Bus attendance</h3><p>Record daily pickup and drop-off status by route and student.</p></article>
+        <article class="feature-card"><span>₹</span><h3>Fee records</h3><p>Track amounts due, payments recorded, balances and due dates.</p></article>
+        <article class="feature-card"><span>🗓️</span><h3>Exam timetables</h3><p>Choose an exam schedule and see subject dates, times and rooms.</p></article>
+        <article class="feature-card"><span>✎</span><h3>School messages</h3><p>Give students a simple way to send a message to their teacher.</p></article>
+      </div>
+    </section>
+
+    <section class="preview-section" id="preview">
+      <div>
+        <p class="eyebrow">A QUICK LOOK</p>
+        <h2>Designed to keep the important details in view.</h2>
+        <p>Teachers can manage student and exam information. Students can sign in to see their own profile, attendance, fees and timetable.</p>
+        <a class="button primary" href="signin.html">Open the portal</a>
+      </div>
+      <div class="preview-card">
+        <div class="preview-top"><span>My dashboard</span><span class="status-pill">Ready</span></div>
+        <div class="preview-stat"><span>Class attendance</span><strong>96%</strong></div>
+        <div class="preview-stat"><span>Next exam</span><strong>Mathematics · 9:00 AM</strong></div>
+        <div class="preview-stat"><span>Fee balance</span><strong>₹400.00</strong></div>
+        <div class="preview-lines"><i></i><i></i><i></i></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="landing-footer">CampusFlow student portal · Demo project. Records are stored in this browser.</footer>
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    menuButton.addEventListener("click", () => {
+      const nav = document.querySelector(".site-nav");
+      const open = nav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(open));
+    });
+  </script>
+</body>
+</html>

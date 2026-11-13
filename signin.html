@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | CampusFlow</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
+  <script src="auth.js" defer></script>
+</head>
+
+<body class="auth-page">
+  <header class="site-header">
+    <a class="brand" href="index.html">
+      <span class="logo">CF</span> CampusFlow
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+    >☰</button>
+
+    <nav class="site-nav">
+      <a href="index.html#features">Features</a>
+      <button class="button secondary theme-toggle" type="button">
+        🌙 Dark theme
+      </button>
+      <a class="button primary" href="register.html">Register</a>
+    </nav>
+  </header>
+
+  <main class="auth-layout auth-layout-single">
+    <section class="auth-intro">
+      <p class="eyebrow">WELCOME BACK</p>
+      <h1>Sign in to your portal</h1>
+      <p>Use your student registration ID or email address and password.</p>
+
+      <div class="demo-hint">
+        <strong>Teacher demo</strong>
+        <span>Username: <code>teacher</code></span>
+        <span>Password: <code>teach123</code></span>
+      </div>
+    </section>
+
+    <form id="signin-form" class="form-card" novalidate>
+      <h2>Sign in</h2>
+
+      <label for="signin-username">Username or email</label>
+      <input
+        id="signin-username"
+        type="text"
+        autocomplete="username"
+        required
+      >
+
+      <label for="signin-password">Password</label>
+      <span class="password-wrap">
+        <input
+          id="signin-password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+        <button
+          class="password-toggle"
+          type="button"
+          data-toggle-password="signin-password"
+        >Show</button>
+      </span>
+
+      <p
+        id="signin-message"
+        class="form-message"
+        role="alert"
+        aria-live="polite"
+      ></p>
+
+      <button class="button primary full-width" type="submit">
+        Sign in
+      </button>
+
+      <p class="form-foot">
+        Don’t have an account?
+        <a href="signup.html">Create account</a>
+      </p>
+      <p class="form-foot">
+        Want to add full student details?
+        <a href="register.html">Register here</a>
+      </p>
+    </form>
+  </main>
+
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      const nav = document.querySelector(".site-nav");
+      const open = nav.classList.toggle("open");
+
+      document
+        .querySelector(".menu-toggle")
+        .setAttribute("aria-expanded", String(open));
+    });
+  </script>
+</body>
+</html>

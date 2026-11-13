@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Register | CampusFlow</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="theme.js" defer></script>
+  <script src="auth.js" defer></script>
+</head>
+<body class="auth-page">
+  <header class="site-header">
+    <a class="brand" href="index.html"><span class="logo">CF</span> CampusFlow</a>
+    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">☰</button>
+    <nav class="site-nav">
+      <a href="index.html#features">Features</a>
+      <button class="button secondary theme-toggle" type="button">🌙 Dark theme</button>
+      <a class="button secondary" href="signin.html">Sign in</a>
+    </nav>
+  </header>
+
+  <main class="auth-layout">
+    <section class="auth-intro">
+      <p class="eyebrow">NEW STUDENT ACCOUNT</p>
+      <h1>Register your student profile</h1>
+      <p>Fill in your details. Fields will be checked as you complete the form.</p>
+      <ul>
+        <li>Use your school registration ID as your login username.</li>
+        <li>Choose a strong password you can remember.</li>
+        <li>Your details are saved in this browser demo.</li>
+      </ul>
+    </section>
+
+    <form id="register-form" class="form-card" novalidate>
+      <h2>Create profile</h2>
+      <label>Full name
+        <input id="reg-name" autocomplete="name" required>
+        <span class="field-error" id="reg-name-error"></span>
+      </label>
+      <label>Employee / Register ID
+        <input id="reg-id" autocomplete="username" required>
+        <span class="field-help">6–12 letters or numbers.</span>
+        <span class="field-error" id="reg-id-error"></span>
+      </label>
+      <label>Email address
+        <input id="reg-email" type="email" autocomplete="email" required>
+        <span class="field-error" id="reg-email-error"></span>
+      </label>
+      <label>Mobile number
+        <input id="reg-mobile" type="tel" autocomplete="tel" required>
+        <span class="field-error" id="reg-mobile-error"></span>
+      </label>
+      <label>Division / Department
+        <select id="reg-division" required>
+          <option value="">Choose a division</option>
+          <option>Computer Science</option>
+          <option>Business Studies</option>
+          <option>Graphic Design</option>
+          <option>Science</option>
+          <option>Arts and Humanities</option>
+          <option>Other</option>
+        </select>
+        <span class="field-error" id="reg-division-error"></span>
+      </label>
+      <label>Password
+        <span class="password-wrap">
+          <input id="reg-password" type="password" autocomplete="new-password" required>
+          <button class="password-toggle" type="button" data-toggle-password="reg-password">Show</button>
+        </span>
+        <span class="field-help">At least 8 characters with uppercase, lowercase, number and symbol.</span>
+        <span class="field-error" id="reg-password-error"></span>
+      </label>
+      <label>Confirm password
+        <span class="password-wrap">
+          <input id="reg-confirm" type="password" autocomplete="new-password" required>
+          <button class="password-toggle" type="button" data-toggle-password="reg-confirm">Show</button>
+        </span>
+        <span class="field-error" id="reg-confirm-error"></span>
+      </label>
+      <p class="form-message" id="register-message" role="alert" aria-live="polite"></p>
+      <button id="register-submit" class="button primary full-width" type="submit" disabled>Create account</button>
+      <p class="form-foot">Already registered? <a href="signin.html">Sign in</a> · Prefer simple sign-up? <a href="signup.html">Use quick sign-up</a></p>
+    </form>
+  </main>
+
+  <script>
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      const nav = document.querySelector(".site-nav");
+      const open = nav.classList.toggle("open");
+      document.querySelector(".menu-toggle").setAttribute("aria-expanded", String(open));
+    });
+  </script>
+</body>
+</html>
